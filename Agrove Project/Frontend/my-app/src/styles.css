@@ -603,6 +603,32 @@ h3 {
   font-size: 1.5rem;
 }
 
+/* Edit Field Page */
+.edit-field-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+.edit-field-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.edit-field-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+  margin-top: 1rem;
+}
+
+.edit-field-card input {
+  background: #fff !important;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
   h1 {
