@@ -1,40 +1,44 @@
-# 🌿 AGROVE – Smart Farming Dashboard<br>
+🌿 AGROVE – Smart Farming Dashboard
 
-AGROVE is a clean, modern web application built for farmers to manage fields, crops, soil data, activities, and analytics easily in one place.<br>
+AGROVE is a simple and modern web app that helps farmers manage their fields, crops, soil details, activities, and analytics through an easy-to-use dashboard.
 
----
+🚀 Installation (Vite + React)
+1. Install Node.js
 
-## 🚀 Installation (Vite + React)<br>
+Download from https://nodejs.org/
 
-### 1️⃣ Install Node.js<br>
-Download from: https://nodejs.org/<br>
+2. Install Dependencies
 
-### 2️⃣ Install Dependencies<br>
-```bash
+Inside project folder:
+
 npm install
-3️⃣ Run the Project<br>
-bash
-Copy code
+
+3. Run the Project
 npm run dev
-Project runs at:<br>
-http://localhost:5173/<br>
 
-📌 Features<br>
-Add / Edit / Delete fields<br>
 
-View crop, area & soil details<br>
+App will open at:
 
-Dashboard with clean UI<br>
+http://localhost:5173/
 
-Advisory & analytics sections<br>
+📌 Features
 
-Fully responsive design<br>
+Add / Edit / Delete Fields
 
-🛠 Tech Stack<br>
-React<br>
+View field details
 
-Vite<br>
+Dashboard with analytics
 
-React Router<br>
+Clean and modern UI
 
-Custom CSS<br>
+Built using Vite + React
+
+📁 Tech Stack
+
+React
+
+Vite
+
+Custom CSS
+
+React Router
