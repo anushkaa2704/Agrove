@@ -45,6 +45,22 @@ body {
   background: var(--gradient-soft);
 }
 
+/* Fields Page Override (ONLY affects FieldsPage) */
+.fields-page-wrapper {
+  display: block !important;
+  padding-top: 3rem;
+  align-items: flex-start !important;
+}
+
+/* Horizontal grid for field cards */
+.fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
 /* Cards */
 .card {
   background: white;
