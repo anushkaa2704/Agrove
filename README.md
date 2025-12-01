@@ -46,7 +46,8 @@ React Router
 Backend
 1. npm install express mongoose cors
 2. mongosh
-3. 
+3. show dbs
+4. use adroveDB
 
 
 
