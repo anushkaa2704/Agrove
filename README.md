@@ -42,3 +42,6 @@ Vite
 Custom CSS
 
 React Router
+
+Backend
+1. npm install express mongoose cors
