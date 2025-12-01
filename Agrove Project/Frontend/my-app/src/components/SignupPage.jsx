@@ -11,11 +11,28 @@ const SignupPage = () => {
     password: '',
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem('user', JSON.stringify(formData));
-    navigate('/dashboard');
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  // store in database via backend API (optional)
+  fetch("http://localhost:5000/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  })
+    .then(res => res.json())
+    .then(data => {
+      if(data.success){
+        // store email for dashboard
+        localStorage.setItem("userEmail", formData.email);
+        navigate('/dashboard');
+      } else {
+        alert("Signup failed");
+      }
+    })
+    .catch(err => console.log(err));
+};
+
+
 
   return (
     <div className="page-wrapper">

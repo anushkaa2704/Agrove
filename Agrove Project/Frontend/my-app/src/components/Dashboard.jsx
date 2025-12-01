@@ -1,11 +1,25 @@
-// Dashboard.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user') || '{"name": "Farmer"}');
+  const [user, setUser] = useState({ name: "Farmer" });
+
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+
+    if (email) {
+      fetch(`http://localhost:5000/user/${email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.name) {
+            setUser({ name: data.name });
+          }
+        })
+        .catch(err => console.log("Error fetching user:", err));
+    }
+  }, []);
 
   const stats = [
     { title: 'Total Fields', value: '5', icon: '📍' },
@@ -23,10 +37,10 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      
+
       <div className="dashboard-bg">
         <div className="dashboard-overlay"></div>
-        
+
         <div className="dashboard-content">
           <div className="container">
             <div className="mb-5">
@@ -56,11 +70,11 @@ const Dashboard = () => {
                   key={index}
                   onClick={() => navigate(action.path)}
                   className="card"
-                  style={{ 
-                    textAlign: 'left', 
-                    border: 'none', 
+                  style={{
+                    textAlign: 'left',
+                    border: 'none',
                     cursor: 'pointer',
-                    background: 'rgba(255, 255, 255, 0.95)'
+                    background: 'rgba(255, 255, 255, 0.95)',
                   }}
                 >
                   <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '1rem' }}>
