@@ -47,7 +47,8 @@ Backend
 1. npm install express mongoose cors
 2. mongosh
 3. show dbs
-4. use adroveDB
+4. use agroveDB
+5. show collections
 
 
 
