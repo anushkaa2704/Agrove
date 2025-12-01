@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
-const Dashboard = () => {
+const Dashboard = () => {  
   const navigate = useNavigate();
   const [user, setUser] = useState({ name: "Farmer" });
 
