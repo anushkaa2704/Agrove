@@ -49,8 +49,7 @@ Backend
 3. show dbs
 4. use agroveDB
 5. show collections
-
-
+6. db.users.find().pretty()
 
 
 
