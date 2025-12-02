@@ -25,12 +25,7 @@ const FieldsPage = () => {
             <h1>My Fields</h1>
             <p className="text-large text-muted">Manage all your agricultural fields</p>
           </div>
-          <button
-            onClick={() => navigate('/add-field')}
-            className="btn btn-primary"
-          >
-            ➕ Add Field
-          </button>
+       
         </div>
 
         <div className="fields-grid">
