@@ -56,13 +56,6 @@ const FieldsPage = () => {
                 <span style={{ fontSize: "2rem" }}>📍</span>
 
                 <div className="field-card-actions">
-                  {/* EDIT BUTTON (optional for now) */}
-                  <button
-                    className="icon-btn"
-                    onClick={() => navigate(`/edit-field/${field.id}`)}
-                  >
-                    ✏️
-                  </button>
 
                   {/* DELETE BUTTON */}
                   <button
