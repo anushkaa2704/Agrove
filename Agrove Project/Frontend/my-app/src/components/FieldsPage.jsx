@@ -41,40 +41,51 @@ const FieldsPage = () => {
         )}
 
         {/* Display fields if available */}
-        <div className="fields-grid">
-          {fields.map((field) => (
-            <div key={field.id} className="field-card">
-              <div className="field-card-header">
-                <span style={{ fontSize: "2rem" }}>📍</span>
-              </div>
+       <div className="fields-grid">
+  {fields.length === 0 && (
+    <p style={{ padding: "1rem", color: "#555" }}>No fields added yet.</p>
+  )}
 
-              <h3 className="mb-2">{field.name}</h3>
+  {fields.map((field) => (
+    <div key={field.id} className="field-card">
+      <div className="field-card-header">
+        <span style={{ fontSize: "2rem" }}>📍</span>
+        <div className="field-card-actions">
+          {/* Edit button */}
+          <button className="icon-btn" onClick={() => navigate(`/edit-field/${field.id}`)}>
+            ✏️
+          </button>
 
-              <div style={{ marginBottom: "1rem" }}>
-                <div className="flex-between mb-1">
-                  <span className="text-muted">Crop:</span>
-                  <strong>{field.crop}</strong>
-                </div>
-                <div className="flex-between mb-1">
-                  <span className="text-muted">Area:</span>
-                  <strong>{field.area}</strong>
-                </div>
-                <div className="flex-between">
-                  <span className="text-muted">Soil:</span>
-                  <strong>{field.soilType}</strong>
-                </div>
-              </div>
-
-              <button
-                onClick={() => navigate(`/field/${field.id}`)}
-                className="btn btn-outline"
-                style={{ width: "100%" }}
-              >
-                View Details
-              </button>
-            </div>
-          ))}
+          {/* Delete button */}
+          <button
+            className="icon-btn icon-btn-danger"
+            onClick={() => handleDelete(field.id)}
+          >
+            🗑️
+          </button>
         </div>
+      </div>
+
+      <h3 className="mb-2">{field.name}</h3>
+
+      <div style={{ marginBottom: "1rem" }}>
+        <div className="flex-between mb-1">
+          <span className="text-muted">Crop:</span>
+          <strong>{field.crop}</strong>
+        </div>
+        <div className="flex-between mb-1">
+          <span className="text-muted">Area:</span>
+          <strong>{field.area}</strong>
+        </div>
+        <div className="flex-between">
+          <span className="text-muted">Soil:</span>
+          <strong>{field.soilType}</strong>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );

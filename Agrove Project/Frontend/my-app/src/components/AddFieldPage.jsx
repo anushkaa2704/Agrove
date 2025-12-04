@@ -13,9 +13,25 @@ const AddFieldPage = () => {
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate('/fields');
+  e.preventDefault();
+
+  const existingFields = JSON.parse(localStorage.getItem("fields") || "[]");
+
+  const newField = {
+    id: Date.now(),
+    name: formData.name,
+    crop: formData.cropType,
+    area: `${formData.area} ${formData.unit}`,
+    soilType: formData.soilType
   };
+
+  const updatedFields = [...existingFields, newField];
+
+  localStorage.setItem("fields", JSON.stringify(updatedFields));
+
+  navigate("/fields");
+};
+
 
   return (
     <div className="page-wrapper">
