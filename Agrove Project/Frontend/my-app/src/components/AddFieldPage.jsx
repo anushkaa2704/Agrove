@@ -12,25 +12,40 @@ const AddFieldPage = () => {
     soilType: '',
   });
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
   e.preventDefault();
 
-  const existingFields = JSON.parse(localStorage.getItem("fields") || "[]");
+  const userEmail = localStorage.getItem("userEmail"); // current logged-in user
+
+  if (!userEmail) {
+    alert("User not logged in!");
+    return;
+  }
 
   const newField = {
-    id: Date.now(),
+    userEmail: userEmail,
     name: formData.name,
     crop: formData.cropType,
     area: `${formData.area} ${formData.unit}`,
     soilType: formData.soilType
   };
 
-  const updatedFields = [...existingFields, newField];
-
-  localStorage.setItem("fields", JSON.stringify(updatedFields));
-
-  navigate("/fields");
+  fetch("http://localhost:5000/add-field", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newField)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      navigate("/fields");
+    } else {
+      alert("Failed to add field");
+    }
+  })
+  .catch(err => console.log("Error adding field:", err));
 };
+
 
 
   return (
