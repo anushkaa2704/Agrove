@@ -44,4 +44,4 @@ Backend
 
 there are 2 collections
 1. users (its stores users account info)
-2. fields
+2. fields (it stores the fields created by users)
