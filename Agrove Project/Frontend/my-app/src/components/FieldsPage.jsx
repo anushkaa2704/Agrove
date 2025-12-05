@@ -1,24 +1,37 @@
-// FieldsPage.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const FieldsPage = () => {
   const navigate = useNavigate();
-
   const [fields, setFields] = useState([]);
 
-  // Load fields from localStorage when page opens
+  const userEmail = localStorage.getItem("userEmail");
+
+  // 🔹 LOAD FIELDS FROM MONGODB
   useEffect(() => {
-    const savedFields = JSON.parse(localStorage.getItem("fields") || "[]");
-    setFields(savedFields);
+    if (!userEmail) return;
+
+    fetch(`http://localhost:5000/fields?email=${userEmail}`)
+      .then((res) => res.json())
+      .then((data) => setFields(data))
+      .catch((err) => console.log("Error loading fields:", err));
   }, []);
 
-  // DELETE a field
+  // 🔹 DELETE FIELD FROM MONGODB
   const deleteField = (id) => {
-    const updatedFields = fields.filter((field) => field.id !== id);
-
-    setFields(updatedFields); // update state
-    localStorage.setItem("fields", JSON.stringify(updatedFields)); // update storage
+    fetch(`http://localhost:5000/fields/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          // Remove from UI
+          setFields((prev) => prev.filter((f) => f._id !== id));
+        } else {
+          alert("Failed to delete field");
+        }
+      })
+      .catch((err) => console.log("Delete error:", err));
   };
 
   return (
@@ -29,10 +42,7 @@ const FieldsPage = () => {
         </a>
 
         <div className="flex-between mb-4">
-          <div>
-            <h1>My Fields</h1>
-          </div>
-
+          <h1>My Fields</h1>
           <button
             className="btn btn-primary"
             onClick={() => navigate("/add-field")}
@@ -41,30 +51,23 @@ const FieldsPage = () => {
           </button>
         </div>
 
-        {/* If no fields added */}
         {fields.length === 0 && (
           <p className="text-muted" style={{ fontSize: "1.2rem" }}>
-            No fields added yet. Click "Add Field" to create your first field.
+            No fields added yet.
           </p>
         )}
 
-        {/* Display fields if available */}
         <div className="fields-grid">
           {fields.map((field) => (
-            <div key={field.id} className="field-card">
+            <div key={field._id} className="field-card">
               <div className="field-card-header">
                 <span style={{ fontSize: "2rem" }}>📍</span>
-
-                <div className="field-card-actions">
-
-                  {/* DELETE BUTTON */}
-                  <button
-                    className="icon-btn icon-btn-danger"
-                    onClick={() => deleteField(field.id)}
-                  >
-                    🗑️
-                  </button>
-                </div>
+                <button
+                  className="icon-btn icon-btn-danger"
+                  onClick={() => deleteField(field._id)}
+                >
+                  🗑️
+                </button>
               </div>
 
               <h3 className="mb-2">{field.name}</h3>
@@ -85,7 +88,7 @@ const FieldsPage = () => {
               </div>
 
               <button
-                onClick={() => navigate(`/field/${field.id}`)}
+                onClick={() => navigate(`/field/${field._id}`)}
                 className="btn btn-outline"
                 style={{ width: "100%" }}
               >

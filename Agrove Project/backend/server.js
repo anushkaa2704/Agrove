@@ -72,6 +72,65 @@ app.post("/login", async (req, res) => {
   res.json({ success: true });
 });
 
+// FIELD SCHEMA
+const fieldSchema = new mongoose.Schema({
+  userEmail: String, 
+  name: String,
+  crop: String,
+  area: String,
+  soilType: String
+});
+
+const Field = mongoose.model("Field", fieldSchema);
+
+
+
+// ADD FIELD API
+app.post("/add-field", async (req, res) => {
+  const { userEmail, name, crop, area, soilType } = req.body;
+
+  try {
+    const newField = new Field({
+      userEmail,
+      name,
+      crop,
+      area,
+      soilType
+    });
+
+    await newField.save();
+
+    res.json({ success: true, message: "Field added successfully" });
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: "Error saving field" });
+  }
+});
+
+// ------------------ GET ALL FIELDS FOR USER ------------------
+app.get("/fields", async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const fields = await Field.find({ userEmail: email });
+    res.json(fields);
+  } catch (err) {
+    console.log(err);
+    res.json([]);
+  }
+});
+
+// ------------------ DELETE FIELD ------------------
+app.delete("/fields/:id", async (req, res) => {
+  try {
+    await Field.findByIdAndDelete(req.params.id);
+    res.json({ success: true, message: "Field deleted" });
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: "Delete failed" });
+  }
+});
+
 
 
 
