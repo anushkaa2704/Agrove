@@ -43,5 +43,5 @@ Backend
 6. db.users.find().pretty()
 
 there are 2 collections
-1. users
+1. users (its stores users account info)
 2. fields
