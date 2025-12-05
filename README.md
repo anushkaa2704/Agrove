@@ -41,3 +41,7 @@ Backend
 4. use agroveDB
 5. show collections
 6. db.users.find().pretty()
+
+there are 2 collections
+1. users
+2. fields
