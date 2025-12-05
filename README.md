@@ -33,15 +33,6 @@ Clean and modern UI
 
 Built using Vite + React
 
-📁 Tech Stack
-
-React
-
-Vite
-
-Custom CSS
-
-React Router
 
 Backend
 1. npm install express mongoose cors
