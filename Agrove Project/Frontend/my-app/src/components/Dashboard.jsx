@@ -45,7 +45,7 @@ const Dashboard = () => {
         <div className="dashboard-content">
           <div className="container">
             <div className="mb-5">
-              <h1>Welcome back, {user.name}!</h1>
+              <h1>Welcome, {user.name}!</h1>
               <p className="text-large text-muted">
                 Here's what's happening with your farm today
               </p>
